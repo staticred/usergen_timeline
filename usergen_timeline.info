@@ -1,0 +1,6 @@
+name = User generated timelines
+description = "This module provides users with the ability to generate timelines based on node data"
+core = 6.x
+package = Data visualization
+
+dependencies[] = timeline
