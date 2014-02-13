@@ -253,7 +253,21 @@ function usergen_timeline_include($timeline_theme = "ClassicTheme") {
 
   // Use SIMILE Server.
   if (variable_get('timeline_library_source', 'hosted') == 'hosted') {
-    $timeline_api = 'http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true';
+  
+    // Determine if we need to link to SSL version of Simile API. Apache and IIS have different
+    // methods of storing this information in their env variables, so we need to catch both. 
+    // Apache: $_SERVER['https'] == 1
+    // IIS: $_SERVER['https'] == 'on'
+    $url_protocol = "";
+    if ($_SERVER['https'] == 1 || $_SERVER['https'] == 'on' || $_SERVER['SERVER_PORT'] == 443) {
+      $url_protocol = "https://";
+    } else {
+      $url_protocol = "http://";
+    }
+  
+    // Include Simile Timeline API
+    $timeline_api = $url_protocol . 'api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true';
+    
     drupal_set_html_head('<script type="text/javascript" src="' . $timeline_api . '"></script>');
   }
   elseif (variable_get('timeline_library_source', 'hosted') == 'local' && $message = timeline_validate_library()) {
