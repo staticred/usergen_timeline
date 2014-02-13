@@ -253,7 +253,7 @@ function usergen_timeline_include($timeline_theme = "ClassicTheme") {
 
   // Use SIMILE Server.
   if (variable_get('timeline_library_source', 'hosted') == 'hosted') {
-    $timeline_api = 'http://static.simile.mit.edu/timeline/api-2.3.0/timeline-api.js?bundle=TRUE';
+    $timeline_api = 'http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true';
     drupal_set_html_head('<script type="text/javascript" src="' . $timeline_api . '"></script>');
   }
   elseif (variable_get('timeline_library_source', 'hosted') == 'local' && $message = timeline_validate_library()) {
